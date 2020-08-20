@@ -2,6 +2,11 @@
 import json
 import time
 
+# Object dasar untuk membuat value pada setiap
+# kolom yang dibutuhkan csv/xls timesheet
+# beberapa kolom adalah hasil generate dari
+# parameter yang dilemparkan saat memanggil
+# class Attendance.
 
 class Attendance:
     def __init__(self, date, attendance_type, attendance_status, activity):
