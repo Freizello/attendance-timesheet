@@ -1,11 +1,11 @@
-# from src.helper.date import get_today
 import json
 import time
+import src.config.constant as cons
+from src.helper import csv as helper_csv
 
-# Object dasar untuk membuat value pada setiap
-# kolom yang dibutuhkan csv/xls timesheet
-# beberapa kolom adalah hasil generate dari
-# parameter yang dilemparkan saat memanggil
+
+# Object dasar untuk membuat value pada setiap kolom yang dibutuhkan csv/xls timesheet
+# beberapa kolom adalah hasil generate dari parameter yang dilemparkan saat memanggil
 # class Attendance.
 
 class Attendance:
@@ -16,8 +16,8 @@ class Attendance:
         # self.activity = activity
 
         self.date = date
-        self.start = time.strftime("%H:%M") if attendance_type == "checkin" else None
-        self.end = time.strftime("%H:%M") if attendance_type == "checkout" else None
+        self.start = time.strftime("%H:%M") if attendance_type == cons.CHECKIN else None
+        self.end = time.strftime("%H:%M") if attendance_type == cons.CHECKOUT else None
         self.total_hour = None
         self.presents = attendance_status if attendance_status == "P" else ""
         self.sick = attendance_status if attendance_status == "S" else ""
@@ -27,5 +27,19 @@ class Attendance:
         self.not_working = attendance_status if attendance_status == "X" else ""
         self.activity = activity
 
+
     def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__)
+
+
+    def checkin_attendance(self):
+        # DONE : insert_csv diubah masuk ke sini
+        absensi_obj = self
+        helper_csv.insert_csv(absensi_obj)
+
+
+    def checkout_attendance(self):
+        pass  # DONE : update_csv diubah masuk ke sini
+        absensi_obj = self
+        helper_csv.update_csv(absensi_obj)
+
