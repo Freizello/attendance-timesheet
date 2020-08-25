@@ -19,27 +19,21 @@ class Attendance:
         self.start = time.strftime("%H:%M") if attendance_type == cons.CHECKIN else None
         self.end = time.strftime("%H:%M") if attendance_type == cons.CHECKOUT else None
         self.total_hour = None
-        self.presents = attendance_status if attendance_status == "P" else ""
-        self.sick = attendance_status if attendance_status == "S" else ""
-        self.business_trip = attendance_status if attendance_status == "BT" else ""
-        self.permit = attendance_status if attendance_status == "PM" else ""
-        self.vacation = attendance_status if attendance_status == "V" else ""
-        self.not_working = attendance_status if attendance_status == "X" else ""
+        self.presents = attendance_status if attendance_status == "P" else None
+        self.sick = attendance_status if attendance_status == "S" else None
+        self.business_trip = attendance_status if attendance_status == "BT" else None
+        self.permit = attendance_status if attendance_status == "PM" else None
+        self.vacation = attendance_status if attendance_status == "V" else None
+        self.not_working = attendance_status if attendance_status == "X" else None
         self.activity = activity
-
 
     def to_json(self):
         return json.dumps(self, default=lambda o: o.__dict__)
 
-
-    def checkin_attendance(self):
+    def checkin(self):
         # DONE : insert_csv diubah masuk ke sini
-        absensi_obj = self
-        helper_csv.insert_csv(absensi_obj)
+        helper_csv.insert_csv(self)
 
-
-    def checkout_attendance(self):
-        pass  # DONE : update_csv diubah masuk ke sini
-        absensi_obj = self
-        helper_csv.update_csv(absensi_obj)
-
+    def checkout(self):
+        # DONE : update_csv diubah masuk ke sini
+        helper_csv.update_csv(self)

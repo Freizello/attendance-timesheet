@@ -46,10 +46,10 @@ def main(argv):
 
     data_absen = absensi(attendance_type=attendance_type, message=message_activity, attendance_status=attendance_status)
     if attendance_type == const.CHECKIN:
-        data_absen.checkin_attendance()
+        data_absen.checkin()
         print(const.MSG_CHECKIN)
     elif attendance_type == const.CHECKOUT:
-        data_absen.checkout_attendance()
+        data_absen.checkout()
         print(const.MSG_CHECKOUT)
         # print("Terima kasih atas kerja kerasnya. Hati hati di jalan")
     else:
