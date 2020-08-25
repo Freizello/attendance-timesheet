@@ -3,6 +3,9 @@ import time
 
 import src.config.constant as cons
 from src.helper import csv as helper_csv
+from src.helper.excel import Excel
+
+from openpyxl import Workbook, load_workbook
 
 
 # Object dasar untuk membuat value pada setiap kolom yang dibutuhkan csv/xls timesheet
@@ -10,6 +13,7 @@ from src.helper import csv as helper_csv
 # class Attendance.
 
 class Attendance:
+
     def __init__(self, date, attendance_type, attendance_status, activity):
         self.date = date
         self.start = time.strftime("%H:%M") if attendance_type == cons.CHECKIN else None
@@ -34,6 +38,18 @@ class Attendance:
         # DONE : update_csv diubah masuk ke sini
         helper_csv.update_csv(self)
 
-    def create_report(self):
-        # TODO : Create report to xlsx file
+    def fill_header(self):
+        excel = Excel(cons.FILENAME_XLSX)
+        excel.sheetname = "Timesheet"
+
+        header = [cons.PROJECT_NAME, cons.UNIT, cons.NAME, cons.ID, cons.PERIODE]
+        excel.fill_cell(
+            values=header,
+            row=cons.TS_HEADER_START_ROW,
+            column=cons.TS_HEADER_START_COL,
+            orientation='vertical'
+        )
+
+    def fill_report(self):
+        # TODO : Isi data harian dari absensi.csv ke report xlsx
         pass

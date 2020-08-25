@@ -55,7 +55,7 @@ if __name__ == '__main__':
     import src.config.constant as const
 
     ex = Excel(const.FILENAME_XLSX)
-    ex.sheetname = "Timesheet"
+    ex.sheetname = "Test"
     wbook, wsheet = ex.read_exist()
 
     # # print(wsheet['A1'].value, type(wsheet['A1'].value))
@@ -74,4 +74,6 @@ if __name__ == '__main__':
         const.PERIODE
     ]
 
-    ex.set_header(header_cell=hcell, value_cell=vcell, value=val)
+
+
+    ex.fill_cell(values=val, row=const.TS_HEADER_START_ROW, column=1, orientation='vertical')

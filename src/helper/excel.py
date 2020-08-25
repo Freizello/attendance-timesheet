@@ -1,4 +1,5 @@
 from openpyxl import Workbook, load_workbook
+from openpyxl.utils import get_column_letter
 from openpyxl.styles import PatternFill, Border, Side, Alignment, Protection, Font
 
 
@@ -19,25 +20,25 @@ class Excel:
             if self.filename is not None:
                 wbook = load_workbook(filename=self.filename)
                 self.sheetnames = list(wbook.sheetnames)
-                # wsheet = wbook[sheetname] if sheetname in self.sheetnames else None
                 if sheetname in self.sheetnames: wsheet = wbook[sheetname]
                 return wbook, wsheet
         except Exception as e:
             raise
 
-    def set_header(self, header_cell: list, value_cell: list, value: list):
-        # TODO : Refactor this, make efficient with params
+    def fill_cell(self, values: list, row: int = 1, column: int = 1, orientation: str = 'vertical'):
+        # DONE : Refactor this, make efficient with params
         wbook, wsheet = self.read_exist()
         try:
-            if len(header_cell) >= len(value):
-                for i in range(len(header_cell)):
-                    print("Writing " + value[i] + " to " + value_cell[i])
-                    wsheet[value_cell[i]].value = value[i]
+            for idx, value in enumerate(values):
+                if orientation == 'vertical':
+                    wsheet.cell(row=idx+row, column=column, value=value)
+                if orientation == 'horizontal':
+                    wsheet.cell(row=row, column=idx+column, value=value)
 
             wbook.save(self.filename)
         except Exception as e:
             raise
 
-    def set_row(self, data:list, start_row):
-        # TODO : Implement this (fill row based on row setting)
+    def set_row(self, data: list, start_row):
+        # DONE : Implement this (fill row based on row setting) Fill_cell
         pass

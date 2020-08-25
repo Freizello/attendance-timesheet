@@ -1,10 +1,14 @@
 from ..helper.date import get_today
 
-# options
+# OPTIONS
 CHECKIN = "in"
 CHECKOUT = "out"
 
-# Header timesheet
+# TIMESHEET HEADER
+TS_HEADER_START_COL: int = 3
+TS_HEADER_START_ROW: int = 1
+# TS_HEADER_VAL_COL: int = 3
+
 PROJECT_NAME = "CBM"
 UNIT = "KJT - BRI 2 Sudirman"
 NAME = "Hendriktio Freizello"

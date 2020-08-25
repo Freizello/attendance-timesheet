@@ -1,10 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 import getopt
 import sys
 
 import src.config.constant as const
 from src.helper.attendance import Attendance
 from src.helper.date import get_today
+from openpyxl import Workbook, load_workbook
 
 # Global variable in main
 filename = const.FILENAME_CSV
@@ -19,6 +20,7 @@ def absensi(attendance_type, message, attendance_status='P'):
         attendance_status=attendance_status,
         activity=message
     )
+
     return data_absen
 
 
@@ -45,13 +47,14 @@ def main(argv):
             message_activity = arg
 
     data_absen = absensi(attendance_type=attendance_type, message=message_activity, attendance_status=attendance_status)
+    # data_absen.fill_header()
+
     if attendance_type == const.CHECKIN:
         data_absen.checkin()
         print(const.MSG_CHECKIN)
     elif attendance_type == const.CHECKOUT:
         data_absen.checkout()
         print(const.MSG_CHECKOUT)
-        # print("Terima kasih atas kerja kerasnya. Hati hati di jalan")
     else:
         print(const.MSG_UNKNOWN_COMMAND)
 
