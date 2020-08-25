@@ -12,8 +12,10 @@ ID = "00116568"
 PERIODE = get_today()
 
 # filename
-# FILENAME_CSV = "absensi.csv" # PROD
-FILENAME_CSV = "absensi.dev.csv" # DEV
+FILENAME_PATH = "src/files/"
+# FILENAME_CSV = FILE_PATH+"absensi.csv" EXISTING
+FILENAME_CSV = FILENAME_PATH+"absensi.dev.csv"
+FILENAME_XLSX = FILENAME_PATH+"template.xlsx"
 
 # message
 MSG_HELP = 'Command : main.py -a --attendance ('+CHECKIN+'/'+CHECKOUT+')" -m --message "your message activity/remark"'

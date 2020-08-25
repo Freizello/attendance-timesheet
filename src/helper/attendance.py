@@ -1,5 +1,6 @@
 import json
 import time
+
 import src.config.constant as cons
 from src.helper import csv as helper_csv
 
@@ -10,11 +11,6 @@ from src.helper import csv as helper_csv
 
 class Attendance:
     def __init__(self, date, attendance_type, attendance_status, activity):
-        # self.date = date
-        # self.attendance_type = attendance_type
-        # self.attendance_status = attendance_status
-        # self.activity = activity
-
         self.date = date
         self.start = time.strftime("%H:%M") if attendance_type == cons.CHECKIN else None
         self.end = time.strftime("%H:%M") if attendance_type == cons.CHECKOUT else None
@@ -37,3 +33,7 @@ class Attendance:
     def checkout(self):
         # DONE : update_csv diubah masuk ke sini
         helper_csv.update_csv(self)
+
+    def create_report(self):
+        # TODO : Create report to xlsx file
+        pass
